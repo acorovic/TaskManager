@@ -11,7 +11,9 @@
     tools:context="rtrtk.pnrs1.ra54_2014.newTaskActivity">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layoutTaskControl"
+        android:layout_alignParentTop="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +21,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/editTaskName"
+                android:hint="@string/editTaskName"
+                android:backgroundTint="@color/colorBackground"
                 android:textAlignment="center"/>
             <DatePicker
                 android:layout_width="match_parent"
@@ -36,17 +39,75 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/editTaskDescription"
+                android:hint="@string/editTaskDescription"
+                android:textAlignment="textStart"
+                android:backgroundTint="@color/colorBackground"
+                android:gravity="top"
                 android:lines="5"
                 android:scrollbars="vertical"
                 android:inputType="textMultiLine"/>
             <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/colorBackground"
                 android:text="@string/checkboxReminder"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/taskPriority"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/highPriorityTask"
+                    android:textColor="@color/colorWhite"
+                    android:backgroundTint="@color/colorHighPriority"/>
+                <Button
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:text="@string/mediumPriorityTask"
+                    android:textColor="@color/colorWhite"
+                    android:backgroundTint="@color/colorMediumPriority"
+                    "/>
+                <Button
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:text="@string/lowPriorityTask"
+                    android:textColor="@color/colorWhite"
+                    android:backgroundTint="@color/colorLowPriority"/>
+            </LinearLayout>
+
 
         </LinearLayout>
 
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/layoutTaskControl">
+        <Button
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
+            android:text="@string/addTask"/>
+        <Button
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
+            android:text="@string/rejectTask"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

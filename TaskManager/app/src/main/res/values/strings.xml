@@ -5,4 +5,10 @@
     <string name="editTaskName">Ime zadatka</string>
     <string name="editTaskDescription">Opis zadatka</string>
     <string name="checkboxReminder">Podseti me 15 minuta pre isteka</string>
+    <string name="taskPriority">Izaberite prioritet zadatka:</string>
+    <string name="addTask">Dodaj</string>
+    <string name="rejectTask">Otkazi</string>
+    <string name="highPriorityTask">Visok</string>
+    <string name="mediumPriorityTask">Srednji</string>
+    <string name="lowPriorityTask">Nizak</string>
 </resources>

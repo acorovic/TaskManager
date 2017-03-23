@@ -20,12 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/newTaskButton"
+            android:backgroundTint="@color/colorButton"
             android:text="@string/newTaskButton"/>
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/statisticButton"
+            android:backgroundTint="@color/colorButton"
             android:text="@string/statisticButton"/>
     </LinearLayout>
 </RelativeLayout>
