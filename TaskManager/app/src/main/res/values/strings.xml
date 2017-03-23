@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Task Manager</string>
+    <string name="statisticButton">Statistika</string>
+    <string name="newTaskButton">Novi zadatak</string>
+    <string name="editTaskName">Ime zadatka</string>
+    <string name="editTaskDescription">Opis zadatka</string>
+    <string name="checkboxReminder">Podseti me 15 minuta pre isteka</string>
 </resources>
