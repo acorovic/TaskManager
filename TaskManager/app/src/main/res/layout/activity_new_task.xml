@@ -21,6 +21,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/editTaskName"
                 android:hint="@string/editTaskName"
                 android:backgroundTint="@color/colorBackground"
                 android:textAlignment="center"/>
@@ -39,6 +40,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/editTaskDescription"
                 android:hint="@string/editTaskDescription"
                 android:textAlignment="textStart"
                 android:backgroundTint="@color/colorBackground"
@@ -65,21 +67,22 @@
                     android:layout_weight="1"
                     android:text="@string/highPriorityTask"
                     android:textColor="@color/colorWhite"
+                    android:id="@+id/buttonHighPriority"
                     android:backgroundTint="@color/colorHighPriority"/>
                 <Button
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
+                    android:id="@+id/buttonMediumPriority"
                     android:text="@string/mediumPriorityTask"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorMediumPriority"
-                    "/>
+                    />
                 <Button
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
+                    android:id="@+id/buttonLowPriority"
                     android:text="@string/lowPriorityTask"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorLowPriority"/>
@@ -98,7 +101,9 @@
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:id="@+id/addTask"
             android:layout_weight="1"
+            android:enabled="false"
             android:backgroundTint="@color/colorButton"
             android:text="@string/addTask"/>
         <Button
