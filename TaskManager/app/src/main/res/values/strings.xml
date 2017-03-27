@@ -11,4 +11,8 @@
     <string name="highPriorityTask">Visok</string>
     <string name="mediumPriorityTask">Srednji</string>
     <string name="lowPriorityTask">Nizak</string>
+    <string name="lowPriorityToast">Odabran NIZAK prioritet!</string>
+    <string name="mediumPriorityToast">Odabran SREDNJI prioritet!</string>
+    <string name="hightPriorityToast">Odabran VISOK prioritet!</string>
+    <string name="timeDateSpinnerError">Nemoguce postaviti podsetnik u proslost!</string>
 </resources>

@@ -28,6 +28,7 @@
             <DatePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/datePicker"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
                 >
@@ -35,6 +36,7 @@
             <TimePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/timePicker"
                 android:timePickerMode="spinner">
             </TimePicker>
             <EditText
@@ -101,13 +103,14 @@
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:id="@+id/addTask"
+            android:id="@+id/buttonAddTask"
             android:layout_weight="1"
             android:enabled="false"
             android:backgroundTint="@color/colorButton"
             android:text="@string/addTask"/>
         <Button
             android:layout_width="0px"
+            android:id="@+id/buttonRejectTask"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/colorButton"
