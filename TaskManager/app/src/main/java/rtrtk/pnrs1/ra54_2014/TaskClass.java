@@ -19,7 +19,7 @@ public class TaskClass implements Serializable {
     private String taskDescription;
     private Calendar taskDate;
     private TimePicker taskTime;
-    private boolean taskReminde;
+    private boolean taskReminder;
     private Priority taskPrioirty;
 
     public TaskClass(String taskName, String taskDescription, Calendar taskDate, TimePicker taskTime, boolean taskReminde, Priority taskPrioirty) {
@@ -27,7 +27,7 @@ public class TaskClass implements Serializable {
         this.taskDescription = taskDescription;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
-        this.taskReminde = taskReminde;
+        this.taskReminder = taskReminde;
         this.taskPrioirty = taskPrioirty;
     }
 
@@ -48,7 +48,7 @@ public class TaskClass implements Serializable {
     }
 
     public void setTaskReminde(boolean taskReminde) {
-        this.taskReminde = taskReminde;
+        this.taskReminder = taskReminde;
     }
 
     public void setTaskPrioirty(Priority taskPrioirty) {
@@ -72,7 +72,7 @@ public class TaskClass implements Serializable {
     }
 
     public boolean isTaskReminde() {
-        return taskReminde;
+        return taskReminder;
     }
 
     public Priority getTaskPrioirty() {
