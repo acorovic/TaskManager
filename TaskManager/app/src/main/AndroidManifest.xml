@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".statisticActivity" />
-        <activity android:name=".newTaskActivity"></activity>
+        <activity android:name=".StatisticActivity" />
+        <activity android:name=".NewTaskActivity"></activity>
     </application>
 
 </manifest>

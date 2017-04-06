@@ -14,11 +14,10 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 
-public class newTaskActivity extends AppCompatActivity {
+public class NewTaskActivity extends AppCompatActivity {
 
     boolean editTextsFilled;
     boolean priorityPressed;
@@ -85,10 +84,10 @@ public class newTaskActivity extends AppCompatActivity {
                         && datePicker.getYear() == date.get(Calendar.YEAR)
                         && (timePicker.getHour() < date.get(Calendar.HOUR_OF_DAY) || (timePicker.getHour() == date.get(Calendar.HOUR_OF_DAY) && timePicker.getMinute() <= date.get(Calendar.MINUTE)))) {
 
-                    Toast toast = Toast.makeText(newTaskActivity.this, R.string.timeDateSpinnerError, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(NewTaskActivity.this, R.string.timeDateSpinnerError, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    Intent intent = new Intent(newTaskActivity.this, MainActivity.class);
+                    Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }
@@ -97,7 +96,7 @@ public class newTaskActivity extends AppCompatActivity {
         rejectTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(newTaskActivity.this, MainActivity.class);
+                Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -105,15 +104,15 @@ public class newTaskActivity extends AppCompatActivity {
         buttonLowPriority.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonLowPriority.setEnabled(false);
-                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorLowPriorityDisabled)));
+                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorLowPriorityDisabled)));
                 buttonMediumPriority.setEnabled(true);
-                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorMediumPriority)));
+                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorMediumPriority)));
                 buttonHighPriority.setEnabled(true);
-                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorHighPriority)));
+                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriority)));
 
                 priorityPressed = true;
 
-                Toast toast = Toast.makeText(newTaskActivity.this, R.string.lowPriorityToast, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(NewTaskActivity.this, R.string.lowPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
 
                 if(editTextsFilled) {
@@ -125,15 +124,15 @@ public class newTaskActivity extends AppCompatActivity {
         buttonMediumPriority.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonMediumPriority.setEnabled(false);
-                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorMediumPriorityDisabled)));
+                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorMediumPriorityDisabled)));
                 buttonLowPriority.setEnabled(true);
-                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorLowPriority)));
+                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorLowPriority)));
                 buttonHighPriority.setEnabled(true);
-                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorHighPriority)));
+                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriority)));
 
                 priorityPressed = true;
 
-                Toast toast = Toast.makeText(newTaskActivity.this, R.string.mediumPriorityToast, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(NewTaskActivity.this, R.string.mediumPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
 
                 if(editTextsFilled) {
@@ -145,15 +144,15 @@ public class newTaskActivity extends AppCompatActivity {
         buttonHighPriority.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonHighPriority.setEnabled(false);
-                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorHighPriorityDisabled)));
+                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriorityDisabled)));
                 buttonMediumPriority.setEnabled(true);
-                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorMediumPriority)));
+                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorMediumPriority)));
                 buttonLowPriority.setEnabled(true);
-                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(newTaskActivity.this, R.color.colorLowPriority)));
+                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorLowPriority)));
 
                 priorityPressed = true;
 
-                Toast toast = Toast.makeText(newTaskActivity.this, R.string.hightPriorityToast, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(NewTaskActivity.this, R.string.hightPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
 
                 if(editTextsFilled) {

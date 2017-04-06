@@ -18,14 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
         newTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, newTaskActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
                 startActivity(intent);
             }
         });
 
         statisticButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, statisticActivity.class);
+                Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
                 startActivity(intent);
             }
         });
