@@ -1,6 +1,8 @@
 package rtrtk.pnrs1.ra54_2014;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,17 +75,14 @@ public class TaskAdapter extends BaseAdapter {
 
         //setting properties
         holder.name.setText(task.getTaskName());
-        switch (task.getTaskPrioirty()) {
-            case LOW:
-                holder.urgency.setBackgroundColor(R.color.colorLowPriority);
-                break;
-            case MEDIUM:
-                holder.urgency.setBackgroundColor(R.color.colorMediumPriority);
-                break;
-            case HIGH:
-                holder.urgency.setBackgroundColor(R.color.colorHighPriority);
-                break;
-        }
+        TaskClass.Priority taskPriority = task.getTaskPriority();
+        if(taskPriority == TaskClass.Priority.LOW)
+            holder.urgency.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorLowPriority));
+        if(taskPriority == TaskClass.Priority.MEDIUM)
+            holder.urgency.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorMediumPriority));
+        if(taskPriority == TaskClass.Priority.HIGH)
+            holder.urgency.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorHighPriority));
+
         holder.checkBox.setChecked(task.isTaskReminder());
 
 

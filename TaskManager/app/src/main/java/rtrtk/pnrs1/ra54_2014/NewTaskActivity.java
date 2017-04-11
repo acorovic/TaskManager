@@ -1,5 +1,6 @@
 package rtrtk.pnrs1.ra54_2014;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -19,9 +21,9 @@ import java.util.Date;
 
 public class NewTaskActivity extends AppCompatActivity {
 
-    boolean editTextsFilled;
-    boolean priorityPressed;
-
+    private boolean editTextsFilled;
+    private boolean priorityPressed;
+    private TaskClass.Priority taskPriority;
     private TextWatcher editTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -61,9 +63,10 @@ public class NewTaskActivity extends AppCompatActivity {
         final Button buttonMediumPriority = (Button) findViewById(R.id.buttonMediumPriority);
         final Button buttonHighPriority = (Button)findViewById(R.id.buttonHighPriority);
         final Button buttonAddTask = (Button) findViewById(R.id.buttonAddTask);
-        Button rejectTask = (Button) findViewById(R.id.buttonRejectTask);
-        EditText editTaskName = (EditText)findViewById(R.id.editTaskName);
-        EditText editTaskDescription = (EditText)findViewById(R.id.editTaskDescription);
+        final Button rejectTask = (Button) findViewById(R.id.buttonRejectTask);
+        final CheckBox reminderTask = (CheckBox) findViewById(R.id.reminderTask);
+        final EditText editTaskName = (EditText)findViewById(R.id.editTaskName);
+        final EditText editTaskDescription = (EditText)findViewById(R.id.editTaskDescription);
 
         final DatePicker datePicker = (DatePicker)findViewById(R.id.datePicker);
         datePicker.setMinDate(new Date().getTime());
@@ -88,7 +91,10 @@ public class NewTaskActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), /*datePicker, timePicker, */reminderTask.isChecked(), taskPriority);
+                    intent.putExtra(getResources().getString(R.string.result), task);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
                 }
             }
         });
@@ -111,6 +117,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriority)));
 
                 priorityPressed = true;
+                taskPriority = TaskClass.Priority.LOW;
 
                 Toast toast = Toast.makeText(NewTaskActivity.this, R.string.lowPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
@@ -131,6 +138,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriority)));
 
                 priorityPressed = true;
+                taskPriority = TaskClass.Priority.MEDIUM;
 
                 Toast toast = Toast.makeText(NewTaskActivity.this, R.string.mediumPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
@@ -151,8 +159,9 @@ public class NewTaskActivity extends AppCompatActivity {
                 buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorLowPriority)));
 
                 priorityPressed = true;
+                taskPriority = TaskClass.Priority.HIGH;
 
-                Toast toast = Toast.makeText(NewTaskActivity.this, R.string.hightPriorityToast, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(NewTaskActivity.this, R.string.highPriorityToast, Toast.LENGTH_SHORT);
                 toast.show();
 
                 if(editTextsFilled) {

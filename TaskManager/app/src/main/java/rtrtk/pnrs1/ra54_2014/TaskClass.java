@@ -1,5 +1,6 @@
 package rtrtk.pnrs1.ra54_2014;
 
+import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import java.io.Serializable;
@@ -17,18 +18,18 @@ public class TaskClass implements Serializable {
 
     private String taskName;
     private String taskDescription;
-    private Calendar taskDate;
+    private DatePicker taskDate;
     private TimePicker taskTime;
     private boolean taskReminder;
-    private Priority taskPrioirty;
+    private Priority taskPriority;
 
-    public TaskClass(String taskName, String taskDescription, Calendar taskDate, TimePicker taskTime, boolean taskReminde, Priority taskPrioirty) {
+    public TaskClass(String taskName, String taskDescription, /*DatePicker taskDate, TimePicker taskTime,*/ boolean taskReminder, Priority taskPriority) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.taskDate = taskDate;
-        this.taskTime = taskTime;
-        this.taskReminder = taskReminde;
-        this.taskPrioirty = taskPrioirty;
+        //this.taskDate = taskDate;
+        //this.taskTime = taskTime;
+        this.taskReminder = taskReminder;
+        this.taskPriority = taskPriority;
     }
 
     public void setTaskName(String taskName) {
@@ -39,7 +40,7 @@ public class TaskClass implements Serializable {
         this.taskDescription = taskDescription;
     }
 
-    public void setTaskDate(Calendar taskDate) {
+    public void setTaskDate(DatePicker taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -47,12 +48,12 @@ public class TaskClass implements Serializable {
         this.taskTime = taskTime;
     }
 
-    public void setTaskReminde(boolean taskReminde) {
-        this.taskReminder = taskReminde;
+    public void setTaskReminde(boolean taskReminder) {
+        this.taskReminder = taskReminder;
     }
 
-    public void setTaskPrioirty(Priority taskPrioirty) {
-        this.taskPrioirty = taskPrioirty;
+    public void setTaskPriority(Priority taskPriority) {
+        this.taskPriority = taskPriority;
     }
 
     public String getTaskName() {
@@ -63,7 +64,7 @@ public class TaskClass implements Serializable {
         return taskDescription;
     }
 
-    public Calendar getTaskDate() {
+    public DatePicker getTaskDate() {
         return taskDate;
     }
 
@@ -75,7 +76,7 @@ public class TaskClass implements Serializable {
         return taskReminder;
     }
 
-    public Priority getTaskPrioirty() {
-        return taskPrioirty;
+    public Priority getTaskPriority() {
+        return taskPriority;
     }
 }

@@ -13,6 +13,7 @@
     <string name="lowPriorityTask">Nizak</string>
     <string name="lowPriorityToast">Odabran NIZAK prioritet!</string>
     <string name="mediumPriorityToast">Odabran SREDNJI prioritet!</string>
-    <string name="hightPriorityToast">Odabran VISOK prioritet!</string>
+    <string name="highPriorityToast">Odabran VISOK prioritet!</string>
     <string name="timeDateSpinnerError">Nemoguce postaviti podsetnik u proslost!</string>
+    <string name="result">result</string>
 </resources>

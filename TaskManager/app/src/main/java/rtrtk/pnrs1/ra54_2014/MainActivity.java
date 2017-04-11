@@ -1,12 +1,17 @@
 package rtrtk.pnrs1.ra54_2014;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TaskAdapter mTaskAdapter;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button newTaskButton = (Button) findViewById(R.id.newTaskButton);
         Button statisticButton = (Button) findViewById(R.id.statisticButton);
+        mTaskAdapter = new TaskAdapter(this);
+        mListView = (ListView)findViewById(R.id.taskListView);
+
+        mListView.setAdapter(mTaskAdapter);
 
         newTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -29,5 +38,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            if(requestCode == 1) {
+                if(resultCode == Activity.RESULT_OK) {
+                    TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
+                    mTaskAdapter.addTask(task);
+                }
+            }
     }
 }

@@ -14,7 +14,6 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/taskNameRow"
-        android:text="sranje"
         android:textAlignment="center"
         android:textSize="20dp"
         android:gravity="center_vertical"
@@ -37,6 +36,7 @@
             android:id="@+id/taskReminderRow"
             android:layout_below="@+id/taskDateRow"
             android:layout_centerHorizontal="true"
+            android:buttonTint="@color/colorBackground"
             android:clickable="false"/>
     </RelativeLayout>
 
