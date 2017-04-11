@@ -71,7 +71,7 @@ public class TaskClass implements Serializable {
         return taskTime;
     }
 
-    public boolean isTaskReminde() {
+    public boolean isTaskReminder() {
         return taskReminder;
     }
 

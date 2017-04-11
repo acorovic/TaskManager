@@ -6,8 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by student on 6.4.2017.
@@ -54,9 +59,42 @@ public class TaskAdapter extends BaseAdapter {
 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            //view = inflater.inflate(R.la)
+            view = inflater.inflate(R.layout.tesk_adapter_row, parent, false);
+            ViewHolder holder = new ViewHolder();
+            holder.name = (TextView) view.findViewById(R.id.taskNameRow);
+            holder.date = (TextView) view.findViewById(R.id.taskDateRow);
+            holder.urgency = (RelativeLayout) view.findViewById(R.id.taskUrgencyRow);
+            holder.checkBox = (CheckBox) view.findViewById(R.id.taskReminderRow);
+            view.setTag(holder);
         }
 
-        return  view;
+        TaskClass task = (TaskClass) getItem(position);
+        ViewHolder holder = (ViewHolder) view.getTag();
+
+        //setting properties
+        holder.name.setText(task.getTaskName());
+        switch (task.getTaskPrioirty()) {
+            case LOW:
+                holder.urgency.setBackgroundColor(R.color.colorLowPriority);
+                break;
+            case MEDIUM:
+                holder.urgency.setBackgroundColor(R.color.colorMediumPriority);
+                break;
+            case HIGH:
+                holder.urgency.setBackgroundColor(R.color.colorHighPriority);
+                break;
+        }
+        holder.checkBox.setChecked(task.isTaskReminder());
+
+
+        return view;
+    }
+
+    private class ViewHolder{
+        public TextView name = null;
+        public TextView date = null;
+        public RelativeLayout urgency = null;
+        public CheckBox checkBox = null;
+
     }
 }

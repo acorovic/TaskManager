@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:longClickable="true">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/taskUrgencyRow"
+        android:background="@color/colorBackground">
+    </RelativeLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/taskNameRow"
+        android:text="sranje"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:gravity="center_vertical"
+        android:layout_weight="4"/>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sranje"
+            android:id="@+id/taskDateRow"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/taskReminderRow"
+            android:layout_below="@+id/taskDateRow"
+            android:layout_centerHorizontal="true"
+            android:clickable="false"/>
+    </RelativeLayout>
+
+</LinearLayout>
