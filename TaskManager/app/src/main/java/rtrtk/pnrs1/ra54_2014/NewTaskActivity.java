@@ -33,6 +33,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            checkFilledFields();
         }
         @Override
         public void afterTextChanged(Editable editable) {
@@ -47,12 +48,16 @@ public class NewTaskActivity extends AppCompatActivity {
         String s1 = editTaskName.getText().toString();
         String s2 = editTaskDescription.getText().toString();
 
+        Button addTask = (Button)findViewById(R.id.buttonAddTask);
+
         if(!s1.equals("") && !s2.equals("")) {
             editTextsFilled = true;
             if(priorityPressed) {
-                Button addTask = (Button)findViewById(R.id.buttonAddTask);
                 addTask.setEnabled(true);
             }
+        } else {
+            editTextsFilled = false;
+            addTask.setEnabled(false);
         }
     }
 
@@ -123,6 +128,8 @@ public class NewTaskActivity extends AppCompatActivity {
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     } else {
+                        // Different than RESULT OK AND RESULT CANCEL
+                        setResult(1);
                         finish();
                     }
                 }
@@ -133,6 +140,8 @@ public class NewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isPreviewMode) {
+                    // Different than RESULT OK AND RESULT CANCEL
+                    setResult(1);
                     finish();
                 } else {
                     setResult(Activity.RESULT_CANCELED);
@@ -158,6 +167,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 if(editTextsFilled) {
                     buttonAddTask.setEnabled(true);
+                } else {
+                    buttonAddTask.setEnabled(false);
                 }
             }
         });
@@ -179,6 +190,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 if(editTextsFilled) {
                     buttonAddTask.setEnabled(true);
+                } else {
+                    buttonAddTask.setEnabled(false);
                 }
             }
         });
@@ -200,6 +213,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 if(editTextsFilled) {
                     buttonAddTask.setEnabled(true);
+                } else {
+                    buttonAddTask.setEnabled(false);
                 }
             }
         });

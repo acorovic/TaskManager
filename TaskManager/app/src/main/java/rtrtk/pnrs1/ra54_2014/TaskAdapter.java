@@ -1,18 +1,22 @@
 package rtrtk.pnrs1.ra54_2014;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+
 
 /**
  * Created by student on 6.4.2017.
@@ -142,8 +146,8 @@ public class TaskAdapter extends BaseAdapter {
             view.setTag(holder);
         }
 
-        TaskClass task = (TaskClass) getItem(position);
-        ViewHolder holder = (ViewHolder) view.getTag();
+        final TaskClass task = (TaskClass) getItem(position);
+        final ViewHolder holder = (ViewHolder) view.getTag();
 
         // Setting properties
         holder.name.setText(task.getTaskName());
@@ -162,6 +166,22 @@ public class TaskAdapter extends BaseAdapter {
         // Form date TextView
         holder.date.setText(checkDate(task.getTaskTimeDate()));
         holder.finished = task.isTaskFinished();
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked)
+            {
+                holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                task.setTaskFinished(true);
+            }
+            else
+            {
+                holder.name.setPaintFlags(holder.name.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                task.setTaskFinished(false);
+            }
+        }
+    });
 
         return view;
     }
