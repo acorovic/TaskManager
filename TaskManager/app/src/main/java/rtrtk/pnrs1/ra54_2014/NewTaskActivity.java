@@ -144,7 +144,8 @@ public class NewTaskActivity extends AppCompatActivity {
                     setResult(1);
                     finish();
                 } else {
-                    setResult(Activity.RESULT_CANCELED);
+                    // 2 -> REMOVE
+                    setResult(2);
                     finish();
                 }
             }

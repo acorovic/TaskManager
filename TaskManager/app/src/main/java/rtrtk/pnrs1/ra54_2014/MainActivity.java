@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode == Activity.RESULT_OK) {
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
                     mTaskAdapter.addTask(task);
-                } else if (resultCode == Activity.RESULT_CANCELED) {
+                } else if (resultCode == 2) {   // 2 -> REMOVE
                     mTaskAdapter.removeTask(itemPositionPreview);
                 }
             }
