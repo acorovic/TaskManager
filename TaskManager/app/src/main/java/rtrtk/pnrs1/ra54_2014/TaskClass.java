@@ -18,16 +18,14 @@ public class TaskClass implements Serializable {
 
     private String taskName;
     private String taskDescription;
-    private DatePicker taskDate;
-    private TimePicker taskTime;
+    private Calendar taskTimeDate;
     private boolean taskReminder;
     private Priority taskPriority;
 
-    public TaskClass(String taskName, String taskDescription, /*DatePicker taskDate, TimePicker taskTime,*/ boolean taskReminder, Priority taskPriority) {
+    public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        //this.taskDate = taskDate;
-        //this.taskTime = taskTime;
+        this.taskTimeDate = taskTimeDate;
         this.taskReminder = taskReminder;
         this.taskPriority = taskPriority;
     }
@@ -40,12 +38,8 @@ public class TaskClass implements Serializable {
         this.taskDescription = taskDescription;
     }
 
-    public void setTaskDate(DatePicker taskDate) {
-        this.taskDate = taskDate;
-    }
-
-    public void setTaskTime(TimePicker taskTime) {
-        this.taskTime = taskTime;
+    public void setTaskTimeDate(Calendar taskTimeDate) {
+        this.taskTimeDate = taskTimeDate;
     }
 
     public void setTaskReminde(boolean taskReminder) {
@@ -64,13 +58,7 @@ public class TaskClass implements Serializable {
         return taskDescription;
     }
 
-    public DatePicker getTaskDate() {
-        return taskDate;
-    }
-
-    public TimePicker getTaskTime() {
-        return taskTime;
-    }
+    public Calendar getTaskTimeDate() { return taskTimeDate;}
 
     public boolean isTaskReminder() {
         return taskReminder;

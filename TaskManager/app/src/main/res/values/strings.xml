@@ -16,4 +16,7 @@
     <string name="highPriorityToast">Odabran VISOK prioritet!</string>
     <string name="timeDateSpinnerError">Nemoguce postaviti podsetnik u proslost!</string>
     <string name="result">result</string>
+    <string name="taskIntent">task intent</string>
+    <string name="updateTaskButton">Azuriraj</string>
+    <string name="deleteTaskButton">Obrisi</string>
 </resources>

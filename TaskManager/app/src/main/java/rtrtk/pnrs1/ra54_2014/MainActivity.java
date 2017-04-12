@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -24,6 +25,17 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView)findViewById(R.id.taskListView);
 
         mListView.setAdapter(mTaskAdapter);
+
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent i = new Intent(MainActivity.this, NewTaskActivity.class);
+                TaskClass task = (TaskClass) mTaskAdapter.getItem(position);
+                i.putExtra(getResources().getString(R.string.taskIntent), task);
+                startActivity(i);
+                return true;
+            }
+        });
 
         newTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

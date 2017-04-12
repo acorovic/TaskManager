@@ -23,6 +23,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
     private boolean editTextsFilled;
     private boolean priorityPressed;
+    private boolean isPreviewMode;
     private TaskClass.Priority taskPriority;
     private TextWatcher editTextWatcher = new TextWatcher() {
         @Override
@@ -67,12 +68,35 @@ public class NewTaskActivity extends AppCompatActivity {
         final CheckBox reminderTask = (CheckBox) findViewById(R.id.reminderTask);
         final EditText editTaskName = (EditText)findViewById(R.id.editTaskName);
         final EditText editTaskDescription = (EditText)findViewById(R.id.editTaskDescription);
-
+        final TimePicker timePicker = (TimePicker)findViewById(R.id.timePicker);
         final DatePicker datePicker = (DatePicker)findViewById(R.id.datePicker);
         datePicker.setMinDate(new Date().getTime());
 
-        editTextsFilled = false;
-        priorityPressed = false;
+        Intent mIntent = getIntent();
+        if(mIntent.hasExtra(getResources().getString(R.string.taskIntent))) {
+            Calendar temp;
+            isPreviewMode = true;
+            // get context of task back
+            TaskClass mTask = (TaskClass) mIntent.getSerializableExtra(getResources().getString(R.string.taskIntent));
+            buttonAddTask.setText(R.string.updateTaskButton);
+            rejectTask.setText(R.string.deleteTaskButton);
+            editTaskName.setText(mTask.getTaskName());
+            editTaskDescription.setText(mTask.getTaskDescription());
+            temp = mTask.getTaskTimeDate();
+            datePicker.updateDate(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), temp.get(Calendar.DAY_OF_MONTH));
+            timePicker.setHour(temp.get(Calendar.HOUR_OF_DAY));
+            timePicker.setMinute(temp.get(Calendar.MINUTE));
+            reminderTask.setChecked(mTask.isTaskReminder());
+
+            editTextsFilled = true;
+            priorityPressed = true;
+            buttonAddTask.setEnabled(true);
+        } else {
+            isPreviewMode = false;
+            editTextsFilled = false;
+            priorityPressed = false;
+        }
+
 
         editTaskName.addTextChangedListener(editTextWatcher);
         editTaskDescription.addTextChangedListener(editTextWatcher);
@@ -80,7 +104,7 @@ public class NewTaskActivity extends AppCompatActivity {
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePicker timePicker = (TimePicker)findViewById(R.id.timePicker);
+
                 Calendar date = Calendar.getInstance();
                 if(datePicker.getDayOfMonth() == date.get(Calendar.DAY_OF_MONTH)
                         && datePicker.getMonth() == date.get(Calendar.MONTH)
@@ -91,7 +115,8 @@ public class NewTaskActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
-                    TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), /*datePicker, timePicker, */reminderTask.isChecked(), taskPriority);
+                    date.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
+                    TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority);
                     intent.putExtra(getResources().getString(R.string.result), task);
                     setResult(Activity.RESULT_OK, intent);
                     finish();
@@ -102,8 +127,7 @@ public class NewTaskActivity extends AppCompatActivity {
         rejectTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -66,7 +67,8 @@ public class TaskAdapter extends BaseAdapter {
             holder.name = (TextView) view.findViewById(R.id.taskNameRow);
             holder.date = (TextView) view.findViewById(R.id.taskDateRow);
             holder.urgency = (RelativeLayout) view.findViewById(R.id.taskUrgencyRow);
-            holder.checkBox = (CheckBox) view.findViewById(R.id.taskReminderRow);
+            //holder.checkBox = (CheckBox) view.findViewById(R.id.taskReminderRow);
+            holder.reminderIcon = (ImageView) view.findViewById(R.id.taskReminderIcon);
             view.setTag(holder);
         }
 
@@ -82,8 +84,12 @@ public class TaskAdapter extends BaseAdapter {
             holder.urgency.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorMediumPriority));
         if(taskPriority == TaskClass.Priority.HIGH)
             holder.urgency.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorHighPriority));
-
-        holder.checkBox.setChecked(task.isTaskReminder());
+        if(task.isTaskReminder()) {
+            holder.reminderIcon.setVisibility(View.VISIBLE);
+        } else {
+            holder.reminderIcon.setVisibility(View.INVISIBLE);
+        }
+        //holder.checkBox.setChecked(task.isTaskReminder());
 
 
         return view;
@@ -94,6 +100,7 @@ public class TaskAdapter extends BaseAdapter {
         public TextView date = null;
         public RelativeLayout urgency = null;
         public CheckBox checkBox = null;
+        public ImageView reminderIcon = null;
 
     }
 }
