@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 /**
@@ -25,6 +26,74 @@ public class TaskAdapter extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<TaskClass> mTasks;
+
+    private String checkTime(Calendar calendar) {
+        String ret = "\n";
+        int tmp = calendar.get(Calendar.HOUR_OF_DAY);
+        ret += tmp < 10 ? "0" + tmp : tmp;
+        ret += ":";
+        tmp = calendar.get(Calendar.MINUTE);
+        ret += tmp < 10 ? "0" + tmp : tmp;
+        return ret;
+    }
+
+    private String checkDate(Calendar calendar) {
+        Calendar dateTomorrow = Calendar.getInstance();
+        Calendar dateThisWeek = Calendar.getInstance();
+        String ret = "";
+
+        if(calendar.get(Calendar.DAY_OF_YEAR) == dateTomorrow.get(Calendar.DAY_OF_YEAR)) {
+            ret = mContext.getResources().getString(R.string.today);
+            ret += checkTime(calendar);
+            return ret;
+        }
+
+        dateTomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        dateThisWeek.add(Calendar.DAY_OF_YEAR, 7);
+        if(calendar.get(Calendar.DAY_OF_YEAR) == dateTomorrow.get(Calendar.DAY_OF_YEAR)) {
+            ret = mContext.getResources().getString(R.string.tomorrow);
+        } else if(calendar.get(Calendar.DAY_OF_YEAR) <= dateThisWeek.get(Calendar.DAY_OF_YEAR)) {
+            switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+                case Calendar.MONDAY:
+                    ret = mContext.getResources().getString(R.string.monday);
+                    break;
+                case Calendar.TUESDAY:
+                    ret = mContext.getResources().getString(R.string.tuesday);
+                    break;
+                case Calendar.WEDNESDAY:
+                    ret = mContext.getResources().getString(R.string.wednesday);
+                    break;
+                case Calendar.THURSDAY:
+                    ret = mContext.getResources().getString(R.string.thursday);
+                    break;
+                case Calendar.FRIDAY:
+                    ret = mContext.getResources().getString(R.string.friday);
+                    break;
+                case Calendar.SATURDAY:
+                    ret = mContext.getResources().getString(R.string.saturday);
+                    break;
+                case Calendar.SUNDAY:
+                    ret = mContext.getResources().getString(R.string.sunday);
+                    break;
+                default:
+                    ret = "";
+                    break;
+            }
+        } else {
+            int tmp = calendar.get(Calendar.DAY_OF_MONTH);
+            ret += tmp < 10 ? "0" + tmp : tmp;
+            ret += "/";
+            tmp = calendar.get(Calendar.MONTH);
+            ret += tmp < 10 ? "0" + tmp : tmp;
+            ret += "/";
+            tmp = calendar.get(Calendar.YEAR);
+            ret += tmp;
+        }
+
+        ret += checkTime(calendar);
+        
+        return ret;
+    }
 
     public TaskAdapter(Context context) {
         mContext = context;
@@ -89,6 +158,8 @@ public class TaskAdapter extends BaseAdapter {
         } else {
             holder.reminderIcon.setVisibility(View.INVISIBLE);
         }
+        //form date TextView
+        holder.date.setText(checkDate(task.getTaskTimeDate()));
         //holder.checkBox.setChecked(task.isTaskReminder());
 
 
