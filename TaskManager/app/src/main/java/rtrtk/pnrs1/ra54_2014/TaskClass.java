@@ -20,6 +20,7 @@ public class TaskClass implements Serializable {
     private String taskDescription;
     private Calendar taskTimeDate;
     private boolean taskReminder;
+    private boolean taskFinished;
     private Priority taskPriority;
 
     public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority) {
@@ -28,6 +29,7 @@ public class TaskClass implements Serializable {
         this.taskTimeDate = taskTimeDate;
         this.taskReminder = taskReminder;
         this.taskPriority = taskPriority;
+        this.taskFinished = false;
     }
 
     public void setTaskName(String taskName) {
@@ -50,6 +52,8 @@ public class TaskClass implements Serializable {
         this.taskPriority = taskPriority;
     }
 
+    public void setTaskFinished(boolean taskFinished) { this.taskFinished = taskFinished;}
+
     public String getTaskName() {
         return taskName;
     }
@@ -63,6 +67,8 @@ public class TaskClass implements Serializable {
     public boolean isTaskReminder() {
         return taskReminder;
     }
+
+    public boolean isTaskFinished() {return taskFinished;}
 
     public Priority getTaskPriority() {
         return taskPriority;

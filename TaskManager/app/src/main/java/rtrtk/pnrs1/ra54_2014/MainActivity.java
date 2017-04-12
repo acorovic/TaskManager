@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TaskAdapter mTaskAdapter;
     private ListView mListView;
+    private int itemPositionPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                itemPositionPreview = position;
                 Intent i = new Intent(MainActivity.this, NewTaskActivity.class);
                 TaskClass task = (TaskClass) mTaskAdapter.getItem(position);
                 i.putExtra(getResources().getString(R.string.taskIntent), task);
-                startActivity(i);
+                startActivityForResult(i, 1);
                 return true;
             }
         });
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode == Activity.RESULT_OK) {
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
                     mTaskAdapter.addTask(task);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    mTaskAdapter.removeTask(itemPositionPreview);
                 }
             }
     }

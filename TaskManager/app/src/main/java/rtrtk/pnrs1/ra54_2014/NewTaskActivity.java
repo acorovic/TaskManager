@@ -25,6 +25,7 @@ public class NewTaskActivity extends AppCompatActivity {
     private boolean priorityPressed;
     private boolean isPreviewMode;
     private TaskClass.Priority taskPriority;
+
     private TextWatcher editTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -76,7 +77,7 @@ public class NewTaskActivity extends AppCompatActivity {
         if(mIntent.hasExtra(getResources().getString(R.string.taskIntent))) {
             Calendar temp;
             isPreviewMode = true;
-            // get context of task back
+            // Get context of task back
             TaskClass mTask = (TaskClass) mIntent.getSerializableExtra(getResources().getString(R.string.taskIntent));
             buttonAddTask.setText(R.string.updateTaskButton);
             rejectTask.setText(R.string.deleteTaskButton);
@@ -114,12 +115,16 @@ public class NewTaskActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(NewTaskActivity.this, R.string.timeDateSpinnerError, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
-                    date.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
-                    TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority);
-                    intent.putExtra(getResources().getString(R.string.result), task);
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
+                    if(!isPreviewMode) {
+                        Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
+                        date.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
+                        TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority);
+                        intent.putExtra(getResources().getString(R.string.result), task);
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
+                    } else {
+                        finish();
+                    }
                 }
             }
         });
@@ -127,7 +132,12 @@ public class NewTaskActivity extends AppCompatActivity {
         rejectTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(!isPreviewMode) {
+                    finish();
+                } else {
+                    setResult(Activity.RESULT_CANCELED);
+                    finish();
+                }
             }
         });
 

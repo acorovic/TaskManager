@@ -1,14 +1,11 @@
 package rtrtk.pnrs1.ra54_2014;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.support.v4.content.ContextCompat;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.ResourceBundle;
 
 /**
  * Created by student on 6.4.2017.
@@ -91,7 +87,7 @@ public class TaskAdapter extends BaseAdapter {
         }
 
         ret += checkTime(calendar);
-        
+
         return ret;
     }
 
@@ -102,6 +98,11 @@ public class TaskAdapter extends BaseAdapter {
 
     public void addTask(TaskClass task) {
         mTasks.add(task);
+        notifyDataSetChanged();
+    }
+
+    public void removeTask(int position) {
+        mTasks.remove(position);
         notifyDataSetChanged();
     }
 
@@ -131,12 +132,12 @@ public class TaskAdapter extends BaseAdapter {
 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.tesk_adapter_row, parent, false);
+            view = inflater.inflate(R.layout.task_adapter_row, parent, false);
             ViewHolder holder = new ViewHolder();
             holder.name = (TextView) view.findViewById(R.id.taskNameRow);
             holder.date = (TextView) view.findViewById(R.id.taskDateRow);
             holder.urgency = (RelativeLayout) view.findViewById(R.id.taskUrgencyRow);
-            //holder.checkBox = (CheckBox) view.findViewById(R.id.taskReminderRow);
+            holder.checkBox = (CheckBox) view.findViewById(R.id.taskFinishedCheckBox);
             holder.reminderIcon = (ImageView) view.findViewById(R.id.taskReminderIcon);
             view.setTag(holder);
         }
@@ -144,7 +145,7 @@ public class TaskAdapter extends BaseAdapter {
         TaskClass task = (TaskClass) getItem(position);
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        //setting properties
+        // Setting properties
         holder.name.setText(task.getTaskName());
         TaskClass.Priority taskPriority = task.getTaskPriority();
         if(taskPriority == TaskClass.Priority.LOW)
@@ -158,10 +159,9 @@ public class TaskAdapter extends BaseAdapter {
         } else {
             holder.reminderIcon.setVisibility(View.INVISIBLE);
         }
-        //form date TextView
+        // Form date TextView
         holder.date.setText(checkDate(task.getTaskTimeDate()));
-        //holder.checkBox.setChecked(task.isTaskReminder());
-
+        holder.finished = task.isTaskFinished();
 
         return view;
     }
@@ -172,6 +172,7 @@ public class TaskAdapter extends BaseAdapter {
         public RelativeLayout urgency = null;
         public CheckBox checkBox = null;
         public ImageView reminderIcon = null;
+        public boolean finished = false;
 
     }
 }
