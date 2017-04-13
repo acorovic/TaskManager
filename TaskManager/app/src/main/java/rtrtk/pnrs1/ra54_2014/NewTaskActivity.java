@@ -26,6 +26,27 @@ public class NewTaskActivity extends AppCompatActivity {
     private boolean isPreviewMode;
     private TaskClass.Priority taskPriority;
 
+    private void setPriorityButton() {
+        switch (taskPriority) {
+            case LOW:
+                Button buttonLowPriority = (Button) findViewById(R.id.buttonLowPriority);
+                buttonLowPriority.setEnabled(false);
+                buttonLowPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorLowPriorityDisabled)));
+                break;
+            case MEDIUM:
+                Button buttonMediumPriority = (Button) findViewById(R.id.buttonMediumPriority);
+                buttonMediumPriority.setEnabled(false);
+                buttonMediumPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorMediumPriorityDisabled)));
+                break;
+            case HIGH:
+                Button buttonHighPriority = (Button) findViewById(R.id.buttonHighPriority);
+                buttonHighPriority.setEnabled(false);
+                buttonHighPriority.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(NewTaskActivity.this, R.color.colorHighPriorityDisabled)));
+                break;
+            
+        }
+    }
+
     private TextWatcher editTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -93,6 +114,8 @@ public class NewTaskActivity extends AppCompatActivity {
             timePicker.setHour(temp.get(Calendar.HOUR_OF_DAY));
             timePicker.setMinute(temp.get(Calendar.MINUTE));
             reminderTask.setChecked(mTask.isTaskReminder());
+            taskPriority = mTask.getTaskPriority();
+            setPriorityButton();
 
             editTextsFilled = true;
             priorityPressed = true;
