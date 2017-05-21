@@ -1,6 +1,8 @@
 package rtrtk.pnrs1.ra54_2014;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +11,16 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TaskAdapter mTaskAdapter;
     private ListView mListView;
     private int itemPositionPreview;
+
+    public static ArrayList<TaskClass> mArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
