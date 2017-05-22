@@ -50,8 +50,9 @@ public class TaskTimeChecker extends Thread {
     public void run() {
         super.run();
         while(mRun) {
-
+            int i = 0;
             for (TaskClass task : MainActivity.mArrayList) {
+
                 if (task.isTaskReminder()) {
                     Calendar c = task.getTaskTimeDate();
                     Calendar now = Calendar.getInstance();
@@ -60,12 +61,17 @@ public class TaskTimeChecker extends Thread {
 
                         mNotificationBuilder.setContentText(task.getTaskName() + " - 15 minute reminder");
 
-                        mNotificationManager.notify(0, mNotificationBuilder.build());
+                        mNotificationManager.notify(i, mNotificationBuilder.build());
                         task.setTaskFinished(true);
                     }
                 }
-
+                i++;
+            }
+            try {
+                sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-    }
 }
 }

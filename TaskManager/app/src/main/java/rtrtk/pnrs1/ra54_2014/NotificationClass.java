@@ -1,5 +1,6 @@
 package rtrtk.pnrs1.ra54_2014;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.RemoteException;
@@ -11,13 +12,21 @@ import android.support.v4.app.NotificationCompat;
 
 public class NotificationClass extends INotificationAidlInterface.Stub {
 
-    private NotificationCompat.Builder mBuilder;
+    private Notification.Builder mBuilder;
     private NotificationManager mNotificationManager;
     private Context mContext;
     private static int ADD_NOTIFICATION = 1;
 
+    public NotificationClass(Context context, NotificationManager mNotificationManager) {
+        mContext = context;
+        this.mNotificationManager = mNotificationManager;
+
+    }
+
     public NotificationClass(Context context) {
         mContext = context;
+        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
     }
 
     public void setmNotificationManager(NotificationManager mNotificationManager) {
@@ -31,7 +40,7 @@ public class NotificationClass extends INotificationAidlInterface.Stub {
 
     @Override
     public void notifyTaskReminder(String taskName) throws RemoteException {
-        mBuilder = new NotificationCompat.Builder(mContext);
+        mBuilder = new Notification.Builder(mContext);
         mBuilder.setContentTitle("Task manager");
         mBuilder.setSmallIcon(android.R.drawable.stat_sys_warning);
         mBuilder.setContentText(taskName + " - istice za 15 minuta");
@@ -41,7 +50,7 @@ public class NotificationClass extends INotificationAidlInterface.Stub {
 
     @Override
     public void notifyTaskAdded(String taskName) throws RemoteException {
-        mBuilder = new NotificationCompat.Builder(mContext);
+        mBuilder = new Notification.Builder(mContext);
         mBuilder.setContentTitle("Task manager");
         mBuilder.setSmallIcon(android.R.drawable.ic_input_add);
         mBuilder.setContentText(taskName + " dodat");
@@ -50,7 +59,7 @@ public class NotificationClass extends INotificationAidlInterface.Stub {
 
     @Override
     public void notifyTaskDeleted(String taskName) throws RemoteException {
-        mBuilder = new NotificationCompat.Builder(mContext);
+        mBuilder = new Notification.Builder(mContext);
         mBuilder.setContentTitle("Task manager");
         mBuilder.setSmallIcon(android.R.drawable.ic_delete);
         mBuilder.setContentText(taskName + " obrisan");
@@ -59,7 +68,7 @@ public class NotificationClass extends INotificationAidlInterface.Stub {
 
     @Override
     public void notifyTaskUpdated(String taskName) throws RemoteException {
-        mBuilder = new NotificationCompat.Builder(mContext);
+        mBuilder = new Notification.Builder(mContext);
         mBuilder.setContentTitle("Task manager");
         mBuilder.setSmallIcon(android.R.drawable.ic_input_add);
         mBuilder.setContentText(taskName + " azuriran");

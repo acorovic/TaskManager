@@ -25,7 +25,7 @@ import java.util.Calendar;
 public class TaskAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<TaskClass> mTasks;
+    public static ArrayList<TaskClass> mTasks;
 
     private String checkTime(Calendar calendar) {
         String ret = "\n";
