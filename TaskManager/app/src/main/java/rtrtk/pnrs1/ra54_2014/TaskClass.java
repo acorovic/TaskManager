@@ -1,5 +1,6 @@
 package rtrtk.pnrs1.ra54_2014;
 
+import android.content.Intent;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -20,7 +21,7 @@ public class TaskClass implements Serializable {
     private String taskDescription;
     private Calendar taskTimeDate;
     private boolean taskReminder;
-    private boolean taskFinished;
+    private int taskFinished;
     private Priority taskPriority;
 
     public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority) {
@@ -29,10 +30,10 @@ public class TaskClass implements Serializable {
         this.taskTimeDate = taskTimeDate;
         this.taskReminder = taskReminder;
         this.taskPriority = taskPriority;
-        this.taskFinished = false;
+        this.taskFinished = 0;
     }
 
-    public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority, boolean taskFinished) {
+    public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority, Integer taskFinished) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.taskTimeDate = taskTimeDate;
@@ -61,7 +62,7 @@ public class TaskClass implements Serializable {
         this.taskPriority = taskPriority;
     }
 
-    public void setTaskFinished(boolean taskFinished) { this.taskFinished = taskFinished;}
+    public void setTaskFinished(int taskFinished) { this.taskFinished = taskFinished;}
 
     public String getTaskName() {
         return taskName;
@@ -77,7 +78,7 @@ public class TaskClass implements Serializable {
         return taskReminder;
     }
 
-    public boolean isTaskFinished() {return taskFinished;}
+    public int isTaskFinished() {return taskFinished;}
 
     public Priority getTaskPriority() {
         return taskPriority;

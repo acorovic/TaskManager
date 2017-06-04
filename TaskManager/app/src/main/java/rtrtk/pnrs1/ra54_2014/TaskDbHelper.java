@@ -51,6 +51,12 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     }
 
+    public void setFinished(int finished, String name) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE task SET TaskFinished="+ finished + " WHERE TaskName='"+ name +"'");
+        close();
+    }
+
     public void insert(TaskClass task) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -59,7 +65,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TASK_DESCRIPTION, task.getTaskDescription());
         values.put(COLUMN_TASK_TIME_DATE, task.getTaskTimeDate().getTimeInMillis());
 
-        Integer priority = 0;
+        int priority = 0;
         switch (task.getTaskPriority()) {
             case HIGH:
                 priority = 2;
@@ -74,17 +80,20 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
         values.put(COLUMN_TASK_PRIORITY, priority);
         values.put(COLUMN_TASK_REMINDER, task.isTaskReminder() ? 1 : 0);
-        values.put(COLUMN_TASK_FINISHED, task.isTaskFinished() ? 1 : 0);
+        values.put(COLUMN_TASK_FINISHED, task.isTaskFinished());
 
         db.insert(TABLE_NAME, null, values);
         close();
     }
+
+
 
     public TaskClass[] readTasks() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
 
         if (cursor.getCount() <= 0) {
+            close();
             return null;
         }
 
@@ -127,6 +136,6 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         int isReminded = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_REMINDER));
         int isFinished = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_FINISHED));
 
-        return new TaskClass(taskName, taskDescription, taskCalendar, isReminded == 1, taskPriority, isFinished == 1);
+        return new TaskClass(taskName, taskDescription, taskCalendar, isReminded == 1, taskPriority, isFinished);
     }
 }

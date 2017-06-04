@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -114,22 +115,23 @@ public class StatisticView extends View {
             int totalCntLow = 0;
             if(tasks != null) {
                 for (TaskClass task : tasks) {
+                    Log.d("task u bazi", task.getTaskName() + " " + Integer.toString(task.isTaskFinished()));
                     switch (task.getTaskPriority()) {
                         case HIGH:
                             totalCntHigh++;
-                            if(task.isTaskFinished()) {
+                            if(task.isTaskFinished() == 1) {
                                 highPriorityTasksFinished++;
                             }
                             break;
                         case MEDIUM:
                             totalCntMedium++;
-                            if(task.isTaskFinished()) {
+                            if(task.isTaskFinished() == 1) {
                                 mediumPriorityTasksFinished++;
                             }
                             break;
                         case LOW:
                             totalCntLow++;
-                            if(task.isTaskFinished()) {
+                            if(task.isTaskFinished() == 1) {
                                 lowPriorityTasksFinished++;
                             }
                             break;

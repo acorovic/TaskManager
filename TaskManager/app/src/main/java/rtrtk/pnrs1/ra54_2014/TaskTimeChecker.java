@@ -57,12 +57,12 @@ public class TaskTimeChecker extends Thread {
                     Calendar c = task.getTaskTimeDate();
                     Calendar now = Calendar.getInstance();
 
-                    if (c.getTimeInMillis() - now.getTimeInMillis() < 15 * 60 * 1000 && !task.isTaskFinished()) {
+                    if (c.getTimeInMillis() - now.getTimeInMillis() < 15 * 60 * 1000 && task.isTaskFinished() == 0) {
 
                         mNotificationBuilder.setContentText(task.getTaskName() + " - 15 minute reminder");
 
                         mNotificationManager.notify(i, mNotificationBuilder.build());
-                        task.setTaskFinished(true);
+                        task.setTaskFinished(1);
                     }
                 }
                 i++;

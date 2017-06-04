@@ -146,7 +146,7 @@ public class NewTaskActivity extends AppCompatActivity {
                     if(!isPreviewMode) {
                         Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
                         date.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
-                        TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority);
+                        TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority, 0);
                         intent.putExtra(getResources().getString(R.string.result), task);
                         setResult(Activity.RESULT_OK, intent);
                         finish();

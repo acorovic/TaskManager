@@ -113,6 +113,7 @@ public class TaskAdapter extends BaseAdapter {
                 mTasks.add(task);
             }
         }
+        notifyDataSetChanged();
     }
 
     public void removeTask(int position) {
@@ -175,35 +176,26 @@ public class TaskAdapter extends BaseAdapter {
         }
         // Form date TextView
         holder.date.setText(checkDate(task.getTaskTimeDate()));
-        holder.finished = task.isTaskFinished();
-
-        if(task.isTaskFinished()) {
-            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.checkBox.setChecked(true);
-        }
+        
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked)
             {
+                task.setTaskFinished(1);
                 holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                MainActivity.mTaskDbHelper.deleteTask(task.getTaskName());
-                task.setTaskFinished(true);
-                MainActivity.mTaskDbHelper.insert(task);
-                TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
-                MainActivity.mTaskAdapter.update(tasks);
+                MainActivity.mTaskDbHelper.setFinished(1, task.getTaskName());
+
             }
             else
             {
-
+                task.setTaskFinished(0);
                 holder.name.setPaintFlags(holder.name.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-                MainActivity.mTaskDbHelper.deleteTask(task.getTaskName());
-                task.setTaskFinished(false);
-                MainActivity.mTaskDbHelper.insert(task);
-                TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
-                MainActivity.mTaskAdapter.update(tasks);
+                MainActivity.mTaskDbHelper.setFinished(0, task.getTaskName());
             }
+            TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
+            MainActivity.mTaskAdapter.update(tasks);
         }
     });
 
@@ -216,7 +208,6 @@ public class TaskAdapter extends BaseAdapter {
         public RelativeLayout urgency = null;
         public CheckBox checkBox = null;
         public ImageView reminderIcon = null;
-        public boolean finished = false;
 
     }
 }
