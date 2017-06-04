@@ -152,7 +152,12 @@ public class NewTaskActivity extends AppCompatActivity {
                         finish();
                     } else {
                         // Different than RESULT OK AND RESULT CANCEL
-                        setResult(1);
+                        //setResult(1);
+                        Intent intent = new Intent(NewTaskActivity.this, MainActivity.class);
+                        date.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
+                        TaskClass task = new TaskClass(editTaskName.getText().toString(), editTaskDescription.getText().toString(), date, reminderTask.isChecked(), taskPriority);
+                        intent.putExtra(getResources().getString(R.string.result), task);
+                        setResult(3, intent);
                         finish();
                     }
                 }
