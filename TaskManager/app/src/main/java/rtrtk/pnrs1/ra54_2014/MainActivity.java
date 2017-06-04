@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TaskAdapter mTaskAdapter;
-    private TaskDbHelper mTaskDbHelper;
+    public static TaskAdapter mTaskAdapter;
+    public static TaskDbHelper mTaskDbHelper;
     private ListView mListView;
     private int itemPositionPreview;
     private INotificationAidlInterface notificationAidlInterface = null;

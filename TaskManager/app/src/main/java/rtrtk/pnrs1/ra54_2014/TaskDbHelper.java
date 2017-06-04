@@ -27,6 +27,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_TIME_DATE = "TaskTimeDate";
     public static final String COLUMN_TASK_PRIORITY = "TaskPriority";
     public static final String COLUMN_TASK_REMINDER = "TaskReminder";
+    public static final String COLUMN_TASK_FINISHED = "TaskFinished";
 
     private SQLiteDatabase mDb = null;
 
@@ -41,6 +42,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                 COLUMN_TASK_DESCRIPTION + " TEXT, " +
                 COLUMN_TASK_TIME_DATE + " LONG," +
                 COLUMN_TASK_PRIORITY +  " INTEGER, " +
+                COLUMN_TASK_FINISHED + " INTEGER, " +
                 COLUMN_TASK_REMINDER + " INTEGER);" );
     }
 
@@ -71,7 +73,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
 
         values.put(COLUMN_TASK_PRIORITY, priority);
-        values.put(COLUMN_TASK_REMINDER, task.isTaskReminder());
+        values.put(COLUMN_TASK_REMINDER, task.isTaskReminder() ? 1 : 0);
+        values.put(COLUMN_TASK_FINISHED, task.isTaskFinished() ? 1 : 0);
 
         db.insert(TABLE_NAME, null, values);
         close();
@@ -122,7 +125,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
 
         int isReminded = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_REMINDER));
+        int isFinished = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_FINISHED));
 
-        return new TaskClass(taskName, taskDescription, taskCalendar, isReminded == 1, taskPriority);
+        return new TaskClass(taskName, taskDescription, taskCalendar, isReminded == 1, taskPriority, isFinished == 1);
     }
 }

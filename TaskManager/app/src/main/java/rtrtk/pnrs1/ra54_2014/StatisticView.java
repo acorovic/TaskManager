@@ -24,9 +24,9 @@ public class StatisticView extends View {
 
     private DrawAnimation drawAnimation = new DrawAnimation();
 
-    private int highPriorityTasksFinished = 30;
-    private int mediumPriorityTasksFinished = 50;
-    private int lowPriorityTasksFinished = 80;
+    private int highPriorityTasksFinished = 0;
+    private int mediumPriorityTasksFinished = 0;
+    private int lowPriorityTasksFinished = 0;
 
     private int highPriorityDrawn = 0;
     private int mediumPriorityDrawn = 0;
@@ -108,6 +108,53 @@ public class StatisticView extends View {
         }
 
         @Override protected Void doInBackground(Void... params) {
+            TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
+            int totalCntHigh = 0;
+            int totalCntMedium = 0;
+            int totalCntLow = 0;
+            if(tasks != null) {
+                for (TaskClass task : tasks) {
+                    switch (task.getTaskPriority()) {
+                        case HIGH:
+                            totalCntHigh++;
+                            if(task.isTaskFinished()) {
+                                highPriorityTasksFinished++;
+                            }
+                            break;
+                        case MEDIUM:
+                            totalCntMedium++;
+                            if(task.isTaskFinished()) {
+                                mediumPriorityTasksFinished++;
+                            }
+                            break;
+                        case LOW:
+                            totalCntLow++;
+                            if(task.isTaskFinished()) {
+                                lowPriorityTasksFinished++;
+                            }
+                            break;
+                    }
+
+                }
+            }
+
+            if(totalCntHigh != 0) {
+                highPriorityTasksFinished = (int) (highPriorityTasksFinished*100/totalCntHigh);}
+            else {
+                highPriorityTasksFinished = 0;
+            }
+            if(totalCntMedium != 0) {
+                mediumPriorityTasksFinished = (int) (mediumPriorityTasksFinished * 100 / totalCntMedium);
+            }
+            else {
+                mediumPriorityTasksFinished = 0;
+            }
+            if(totalCntLow != 0) {
+                lowPriorityTasksFinished = (int) (lowPriorityTasksFinished * 100 / totalCntLow);
+            }
+            else {
+                lowPriorityTasksFinished = 0;
+            }
             while(highPriorityDrawn < highPriorityTasksFinished || mediumPriorityDrawn < mediumPriorityTasksFinished || lowPriorityDrawn < lowPriorityTasksFinished) {
                 if(highPriorityDrawn < highPriorityTasksFinished) {
                     highPriorityDrawn++;
@@ -124,7 +171,7 @@ public class StatisticView extends View {
                 }
 
                 postInvalidate();
-                SystemClock.sleep(50);
+                SystemClock.sleep(25);
             }
             return null;
         }

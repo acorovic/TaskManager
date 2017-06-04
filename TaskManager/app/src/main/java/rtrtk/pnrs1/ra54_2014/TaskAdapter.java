@@ -183,12 +183,21 @@ public class TaskAdapter extends BaseAdapter {
             if(isChecked)
             {
                 holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                MainActivity.mTaskDbHelper.deleteTask(task.getTaskName());
                 task.setTaskFinished(true);
+                MainActivity.mTaskDbHelper.insert(task);
+                TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
+                MainActivity.mTaskAdapter.update(tasks);
             }
             else
             {
+
                 holder.name.setPaintFlags(holder.name.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                MainActivity.mTaskDbHelper.deleteTask(task.getTaskName());
                 task.setTaskFinished(false);
+                MainActivity.mTaskDbHelper.insert(task);
+                TaskClass[] tasks = MainActivity.mTaskDbHelper.readTasks();
+                MainActivity.mTaskAdapter.update(tasks);
             }
         }
     });

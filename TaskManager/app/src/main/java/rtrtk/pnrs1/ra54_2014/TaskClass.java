@@ -32,6 +32,15 @@ public class TaskClass implements Serializable {
         this.taskFinished = false;
     }
 
+    public TaskClass(String taskName, String taskDescription, Calendar taskTimeDate, boolean taskReminder, Priority taskPriority, boolean taskFinished) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.taskTimeDate = taskTimeDate;
+        this.taskReminder = taskReminder;
+        this.taskPriority = taskPriority;
+        this.taskFinished = taskFinished;
+    }
+
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
