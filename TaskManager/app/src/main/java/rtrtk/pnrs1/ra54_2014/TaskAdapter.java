@@ -27,7 +27,7 @@ public class TaskAdapter extends BaseAdapter {
     private Context mContext;
     public static ArrayList<TaskClass> mTasks;
 
-    private String checkTime(Calendar calendar) {
+    public String checkTime(Calendar calendar) {
         String ret = "\n";
         int tmp = calendar.get(Calendar.HOUR_OF_DAY);
         ret += tmp < 10 ? "0" + tmp : tmp;
@@ -37,7 +37,7 @@ public class TaskAdapter extends BaseAdapter {
         return ret;
     }
 
-    private String checkDate(Calendar calendar) {
+    public String checkDate(Calendar calendar) {
         Calendar dateTomorrow = Calendar.getInstance();
         Calendar dateThisWeek = Calendar.getInstance();
         String ret = "";
@@ -93,6 +93,10 @@ public class TaskAdapter extends BaseAdapter {
         ret += checkTime(calendar);
 
         return ret;
+    }
+
+    public TaskAdapter() {
+
     }
 
     public TaskAdapter(Context context) {
