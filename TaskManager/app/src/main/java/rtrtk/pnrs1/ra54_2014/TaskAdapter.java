@@ -95,9 +95,6 @@ public class TaskAdapter extends BaseAdapter {
         return ret;
     }
 
-    public TaskAdapter() {
-
-    }
 
     public TaskAdapter(Context context) {
         mContext = context;
@@ -107,6 +104,15 @@ public class TaskAdapter extends BaseAdapter {
     public void addTask(TaskClass task) {
         mTasks.add(task);
         notifyDataSetChanged();
+    }
+
+    public void update(TaskClass[] tasks) {
+        mTasks.clear();
+        if(tasks != null) {
+            for(TaskClass task : tasks) {
+                mTasks.add(task);
+            }
+        }
     }
 
     public void removeTask(int position) {

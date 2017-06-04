@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private TaskAdapter mTaskAdapter;
+    private TaskDbHelper mTaskDbHelper;
     private ListView mListView;
     private int itemPositionPreview;
     private INotificationAidlInterface notificationAidlInterface = null;
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static ArrayList<TaskClass> mArrayList;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TaskClass[] tasks = mTaskDbHelper.readTasks();
+        mTaskAdapter.update(tasks);
+    }
 
 
     @Override
@@ -49,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mArrayList = TaskAdapter.mTasks;
 
         mListView.setAdapter(mTaskAdapter);
+        mTaskDbHelper = new TaskDbHelper(this);
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -83,7 +93,10 @@ public class MainActivity extends AppCompatActivity {
             if(requestCode == 1) {
                 if(resultCode == Activity.RESULT_OK) {
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
-                    mTaskAdapter.addTask(task);
+                    mTaskDbHelper.insert(task);
+                    //mTaskAdapter.addTask(task);
+                    TaskClass[] tasks = mTaskDbHelper.readTasks();
+                    mTaskAdapter.update(tasks);
                     try {
                         Log.d("text", "pravljenje notifikacije");
                         notificationAidlInterface.notifyTaskAdded(task.getTaskName());
@@ -92,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                 } else if (resultCode == 2) {   // 2 -> REMOVE
                     TaskClass task = (TaskClass) mTaskAdapter.getItem(itemPositionPreview);
-                    mTaskAdapter.removeTask(itemPositionPreview);
+                    //mTaskAdapter.removeTask(itemPositionPreview);
+                    mTaskDbHelper.deleteTask(task.getTaskName());
+                    TaskClass[] tasks = mTaskDbHelper.readTasks();
+                    mTaskAdapter.update(tasks);
                     try{
                         Log.d("text", "pravljenje notifikacije");
                         notificationAidlInterface.notifyTaskDeleted(task.getTaskName());
