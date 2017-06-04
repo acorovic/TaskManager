@@ -176,7 +176,11 @@ public class TaskAdapter extends BaseAdapter {
         }
         // Form date TextView
         holder.date.setText(checkDate(task.getTaskTimeDate()));
-        
+
+        if(task.isTaskFinished() == 1) {
+            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.checkBox.setChecked(true);
+        }
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override

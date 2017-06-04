@@ -53,7 +53,31 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     public void setFinished(int finished, String name) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE task SET TaskFinished="+ finished + " WHERE TaskName='"+ name +"'");
+        db.execSQL("UPDATE "+ TABLE_NAME + " SET "+ COLUMN_TASK_FINISHED + "=" + finished + " WHERE TaskName='"+ name +"'");
+        close();
+    }
+
+    public void updateTask(TaskClass task) {
+        SQLiteDatabase db = getWritableDatabase();
+        int priority = 0;
+        switch (task.getTaskPriority()) {
+            case HIGH:
+                priority = 2;
+                break;
+            case MEDIUM:
+                priority = 1;
+                break;
+            case LOW:
+                priority = 0;
+                break;
+        }
+
+        db.execSQL("UPDATE "+ TABLE_NAME + " SET "
+                + COLUMN_TASK_DESCRIPTION + "='" + task.getTaskDescription() +"',"
+                + COLUMN_TASK_TIME_DATE + "=" + task.getTaskTimeDate().getTimeInMillis() + ","
+                + COLUMN_TASK_REMINDER + "=" + (task.isTaskReminder() ? 1 : 0) + ","
+                + COLUMN_TASK_PRIORITY + "=" + priority + ","
+                + COLUMN_TASK_FINISHED + "=" + task.isTaskFinished() + " WHERE TaskName='"+ task.getTaskName() +"'");
         close();
     }
 

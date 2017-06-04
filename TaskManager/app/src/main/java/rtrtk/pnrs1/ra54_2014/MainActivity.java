@@ -117,8 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 } else if(resultCode == 3) { // 3 -> UPDATE
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
-                    mTaskDbHelper.deleteTask(task.getTaskName());
-                    mTaskDbHelper.insert(task);
+                    //mTaskDbHelper.deleteTask(task.getTaskName());
+                    //mTaskDbHelper.insert(task);
+                    mTaskDbHelper.updateTask(task);
                     //mTaskAdapter.addTask(task);
                     TaskClass[] tasks = mTaskDbHelper.readTasks();
                     mTaskAdapter.update(tasks);
