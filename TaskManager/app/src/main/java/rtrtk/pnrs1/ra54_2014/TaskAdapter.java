@@ -177,6 +177,11 @@ public class TaskAdapter extends BaseAdapter {
         holder.date.setText(checkDate(task.getTaskTimeDate()));
         holder.finished = task.isTaskFinished();
 
+        if(task.isTaskFinished()) {
+            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.checkBox.setChecked(true);
+        }
+
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
