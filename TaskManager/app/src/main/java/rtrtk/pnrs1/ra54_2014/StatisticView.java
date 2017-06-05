@@ -132,7 +132,7 @@ public class StatisticView extends View {
                         case LOW:
                             totalCntLow++;
                             if(task.isTaskFinished() == 1) {
-                                lowPriorityTasksFinished++;
+                                   lowPriorityTasksFinished++;
                             }
                             break;
                     }
