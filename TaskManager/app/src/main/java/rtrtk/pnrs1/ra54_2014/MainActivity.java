@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode == Activity.RESULT_OK) {
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
                     mTaskDbHelper.insert(task);
-                    //mTaskAdapter.addTask(task);
+                    
                     TaskClass[] tasks = mTaskDbHelper.readTasks();
                     mTaskAdapter.update(tasks);
                     try {
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                 } else if (resultCode == 2) {   // 2 -> REMOVE
                     TaskClass task = (TaskClass) mTaskAdapter.getItem(itemPositionPreview);
-                    //mTaskAdapter.removeTask(itemPositionPreview);
+
                     mTaskDbHelper.deleteTask(task.getTaskName());
                     TaskClass[] tasks = mTaskDbHelper.readTasks();
                     mTaskAdapter.update(tasks);
@@ -117,10 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 } else if(resultCode == 3) { // 3 -> UPDATE
                     TaskClass task = (TaskClass) data.getExtras().getSerializable(getResources().getString(R.string.result));
-                    //mTaskDbHelper.deleteTask(task.getTaskName());
-                    //mTaskDbHelper.insert(task);
+
                     mTaskDbHelper.updateTask(task);
-                    //mTaskAdapter.addTask(task);
+
                     TaskClass[] tasks = mTaskDbHelper.readTasks();
                     mTaskAdapter.update(tasks);
                     try {
