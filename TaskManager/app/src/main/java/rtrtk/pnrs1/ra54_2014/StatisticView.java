@@ -139,7 +139,7 @@ public class StatisticView extends View {
 
                 }
             }
-            
+
             CalculateStatisticsNative cln = new CalculateStatisticsNative();
             highPriorityTasksFinished = cln.getStatistic(totalCntHigh, highPriorityTasksFinished);
             mediumPriorityTasksFinished = cln.getStatistic(totalCntMedium, mediumPriorityTasksFinished);
