@@ -139,24 +139,12 @@ public class StatisticView extends View {
 
                 }
             }
+            
+            CalculateStatisticsNative cln = new CalculateStatisticsNative();
+            highPriorityTasksFinished = cln.getStatistic(totalCntHigh, highPriorityTasksFinished);
+            mediumPriorityTasksFinished = cln.getStatistic(totalCntMedium, mediumPriorityTasksFinished);
+            lowPriorityTasksFinished = cln.getStatistic(totalCntLow, lowPriorityTasksFinished);
 
-            if(totalCntHigh != 0) {
-                highPriorityTasksFinished = (int) (highPriorityTasksFinished*100/totalCntHigh);}
-            else {
-                highPriorityTasksFinished = 0;
-            }
-            if(totalCntMedium != 0) {
-                mediumPriorityTasksFinished = (int) (mediumPriorityTasksFinished * 100 / totalCntMedium);
-            }
-            else {
-                mediumPriorityTasksFinished = 0;
-            }
-            if(totalCntLow != 0) {
-                lowPriorityTasksFinished = (int) (lowPriorityTasksFinished * 100 / totalCntLow);
-            }
-            else {
-                lowPriorityTasksFinished = 0;
-            }
             while(highPriorityDrawn < highPriorityTasksFinished || mediumPriorityDrawn < mediumPriorityTasksFinished || lowPriorityDrawn < lowPriorityTasksFinished) {
                 if(highPriorityDrawn < highPriorityTasksFinished) {
                     highPriorityDrawn++;

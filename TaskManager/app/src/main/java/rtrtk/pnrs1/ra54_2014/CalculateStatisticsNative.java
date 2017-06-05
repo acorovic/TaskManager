@@ -8,6 +8,6 @@ public class CalculateStatisticsNative {
     public native int getStatistic(int totalCnt, int finishedCnt);
 
     static {
-        System.loadLibrary("libStatisticNative");
+        System.loadLibrary("StatisticNative");
     }
 }
